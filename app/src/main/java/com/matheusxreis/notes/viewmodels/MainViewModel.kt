@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.matheusxreis.notes.data.DataStoreRepository
+import com.matheusxreis.notes.data.LocalDataSource
 import com.matheusxreis.notes.models.Note
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -13,7 +14,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val dataStoreRepo: DataStoreRepository
+    private val dataStoreRepo: DataStoreRepository,
+    private val localDataSource: LocalDataSource
 ): ViewModel() {
 
     var notes:MutableLiveData<List<Note>> = MutableLiveData()

@@ -10,4 +10,9 @@
         android:name="com.matheusxreis.notes.ui.fragments.NotesFragment"
         android:label="Your notes"
         tools:layout="@layout/fragment_notes" />
+    <fragment
+        android:id="@+id/writeNoteFragment"
+        android:name="com.matheusxreis.notes.WriteNoteFragment"
+        android:label="Write a note"
+        tools:layout="@layout/fragment_write_note" />
 </navigation>
