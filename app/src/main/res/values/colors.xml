@@ -11,6 +11,16 @@
 
     <color name="blue_200">#90CAF9</color>
     <color name="blue_500">#2196F3</color>
-    <color name="darkGray">#4B4B4B</color>
+    <color name="darkGray">#121212</color>
+    <color name="lightGray">#F9F9F9</color>
+    <color name="darker">#151B20</color>
+    <color name="lightMediumGray">#80D1D1D1</color>
+
+
+    <!-- chip colors -->
+    <color name="chip_background_checked">@color/blue_200</color>
+    <color name="chip_background">@color/white</color>
+    <color name="chip_text_checked">@color/blue_500</color>
+    <color name="chip_text">@color/blue_200</color>
 
 </resources>

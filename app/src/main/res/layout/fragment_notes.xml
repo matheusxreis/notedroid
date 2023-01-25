@@ -28,20 +28,24 @@
                    android:layout_height="wrap_content"
                    app:selectionRequired="true"
                    app:checkedChip="@+id/all_chip"
+                   app:singleSelection="true"
                    >
                    <com.google.android.material.chip.Chip
+                       style="@style/MyChipStyle"
                        android:id="@+id/all_chip"
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
                        android:text="All"
                        />
                    <com.google.android.material.chip.Chip
+                       style="@style/MyChipStyle"
                        android:id="@+id/importants_chip"
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
                        android:text="Importants"
                        />
                    <com.google.android.material.chip.Chip
+                       style="@style/MyChipStyle"
                        android:id="@+id/not_importants_chip"
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
