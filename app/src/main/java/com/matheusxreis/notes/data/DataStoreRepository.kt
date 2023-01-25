@@ -1,7 +1,6 @@
 package com.matheusxreis.notes.data
 
 import android.content.Context
-import android.provider.ContactsContract.CommonDataKinds.Im
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
@@ -14,6 +13,7 @@ import dagger.hilt.android.scopes.ActivityRetainedScoped
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
+import java.io.IOException
 import javax.inject.Inject
 
 @ActivityRetainedScoped
@@ -29,11 +29,15 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
         )
 
         val readFilterImportant:Flow<ImportantFilter> = dataStore.data
-            .catch {
-                emit(emptyPreferences())
+            .catch { exception ->
+                if(exception is IOException){
+                    emit(emptyPreferences())
+                }else {
+                    throw exception
+                }
             }
             .map { preference ->
-                val importantFilter =  preference[PreferenceKeys.selectedImportantFilter] ?: Constants.FILTER_IMPORTANT_VALUE_DEFAULT
+                val importantFilter =  preference[PreferenceKeys.selectedImportantFilter].toString() ?: Constants.FILTER_IMPORTANT_VALUE_DEFAULT
                 val importantFilterId = preference[PreferenceKeys.selectedImportantFilterId] ?: 0
 
                 ImportantFilter(
@@ -46,8 +50,8 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
             importantFilterId:Int
         ) {
             dataStore.edit { preference ->
-                preference[PreferenceKeys.selectedImportantFilter] = importantFilter
-                preference[PreferenceKeys.selectedImportantFilterId] = importantFilterId
+                 preference[PreferenceKeys.selectedImportantFilter] = importantFilter
+                 preference[PreferenceKeys.selectedImportantFilterId] = importantFilterId
             }
 
         }

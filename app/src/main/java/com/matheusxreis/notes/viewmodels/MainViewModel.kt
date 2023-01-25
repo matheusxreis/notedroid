@@ -2,14 +2,19 @@ package com.matheusxreis.notes.viewmodels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import com.matheusxreis.notes.data.DataStoreRepository
 import com.matheusxreis.notes.models.Note
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(): ViewModel() {
+class MainViewModel @Inject constructor(
+    private val dataStoreRepo: DataStoreRepository
+): ViewModel() {
 
     var notes:MutableLiveData<List<Note>> = MutableLiveData()
 
@@ -35,4 +40,20 @@ class MainViewModel @Inject constructor(): ViewModel() {
         notes.value = mockListNotes
     }
 
+    val actualFilter = dataStoreRepo.readFilterImportant.asLiveData()
+
+    fun changeFilter(
+        filterImportantName: String,
+        filterImportantId: Int
+    ) = viewModelScope.launch (Dispatchers.IO){
+
+      try{
+          dataStoreRepo.saveImportantFilter(
+              importantFilter = filterImportantName,
+              importantFilterId = filterImportantId
+          )
+      }catch(err:Exception){
+
+      }
+    }
 }
