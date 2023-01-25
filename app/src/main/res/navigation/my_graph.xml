@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/notes_fragment"
-        android:name="com.matheusxreis.notes.NotesFragment"
+        android:name="com.matheusxreis.notes.ui.fragments.NotesFragment"
         android:label="Your notes"
         tools:layout="@layout/fragment_notes" />
 </navigation>

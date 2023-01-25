@@ -1,4 +1,4 @@
-package com.matheusxreis.notes
+package com.matheusxreis.notes.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,6 +6,7 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.matheusxreis.notes.R
 
 class MainActivity : AppCompatActivity() {
 
