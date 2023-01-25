@@ -36,6 +36,7 @@
                 android:layout_margin="10dp">
 
                 <ImageView
+                    setImportantColor="@{note.important}"
                     android:id="@+id/important_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -44,7 +45,7 @@
                     app:layout_constraintStart_toEndOf="@id/notes_title"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintHorizontal_bias="1"
-                    app:tint="@color/blue_500" />
+                    app:tint="@android:color/darker_gray" />
 
                 <TextView
                     android:text="@{note.title}"
