@@ -11,8 +11,10 @@ import com.matheusxreis.notes.R
 import com.matheusxreis.notes.adapters.NotesAdapter
 import com.matheusxreis.notes.models.Note
 import com.matheusxreis.notes.viewmodels.MainViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_notes.view.*
 
+@AndroidEntryPoint
 class NotesFragment : Fragment() {
 
     private lateinit var notesAdapter: NotesAdapter;
