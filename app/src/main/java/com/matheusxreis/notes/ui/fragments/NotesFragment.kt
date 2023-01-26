@@ -14,6 +14,7 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.matheusxreis.notes.R
 import com.matheusxreis.notes.adapters.NotesAdapter
+import com.matheusxreis.notes.data.database.entityToNote
 import com.matheusxreis.notes.models.Note
 import com.matheusxreis.notes.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -82,10 +83,10 @@ class NotesFragment : Fragment() {
     }
 
     fun populateRecyclerView() {
-        mainViewModel.getNotes()
 
         mainViewModel.notes.observe(viewLifecycleOwner) {
-            notesAdapter.setData(it)
+            val notes = it.map {  noteEntity -> noteEntity.entityToNote(noteEntity)  }
+            notesAdapter.setData(notes)
         }
     }
 

@@ -19,7 +19,8 @@ class MainViewModel @Inject constructor(
     private val localDataSource: LocalDataSource
 ): ViewModel() {
 
-    var notes:MutableLiveData<List<Note>> = MutableLiveData()
+    var notes = localDataSource.readNotes().asLiveData()
+
 
     private val mockListNotes = listOf(
         Note(id=1, title="Be or not be", text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In aliquam et sem a maximus. Integer eleifend nisi a aliquet posuere. Nulla mollis facilisis enim, nec malesuada libero consequat at. Curabitur lacinia pulvinar ultricies. Mauris vel feugiat leo. Sed at placerat nulla, ac maximus velit. Ut aliquet dignissim dolor finibus aliquet.", important = true),
@@ -39,9 +40,7 @@ class MainViewModel @Inject constructor(
         Note(id=15, title="Be or not be", text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In aliquam et sem a maximus. Integer eleifend nisi a aliquet posuere. Nulla mollis facilisis enim, nec malesuada libero consequat at. Curabitur lacinia pulvinar ultricies. Mauris vel feugiat leo. Sed at placerat nulla, ac maximus velit. Ut aliquet dignissim dolor finibus aliquet."),
         )
 
-    fun getNotes() = viewModelScope.launch {
-        notes.value = mockListNotes
-    }
+
 
     val actualFilter = dataStoreRepo.readFilterImportant.asLiveData()
 
