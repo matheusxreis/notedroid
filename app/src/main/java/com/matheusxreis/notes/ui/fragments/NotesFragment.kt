@@ -30,7 +30,12 @@ class NotesFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        notesAdapter = NotesAdapter()
+        notesAdapter = NotesAdapter {
+            val action = NotesFragmentDirections.actionNotesFragmentToNoteInfoFragment(
+                noteId = it as Int
+            )
+            findNavController().navigate(action)
+        }
         mainViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
 
     }
