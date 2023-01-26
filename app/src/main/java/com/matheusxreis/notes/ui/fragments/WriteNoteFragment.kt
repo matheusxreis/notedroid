@@ -71,6 +71,7 @@ class WriteNoteFragment : Fragment() {
                 binding.editTextTitle.text = null
                 binding.editTextText.text = null
 
+                mainViewModel.getNotes(mainViewModel.actualFilter.value.toString())
                 goBack()
             }
 
