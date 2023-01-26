@@ -48,7 +48,7 @@
                     app:tint="@android:color/darker_gray" />
 
                 <TextView
-                    android:text="@{note.title}"
+                    ellipsizeTitle="@{note.title}"
                     android:id="@+id/notes_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
