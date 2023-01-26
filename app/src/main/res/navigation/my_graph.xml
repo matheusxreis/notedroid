@@ -34,5 +34,9 @@
         <action
             android:id="@+id/action_noteInfoFragment_to_notes_fragment"
             app:destination="@id/notes_fragment" />
+        <argument
+            android:name="noteId"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
 </navigation>
