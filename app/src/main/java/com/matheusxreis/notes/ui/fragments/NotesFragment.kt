@@ -7,10 +7,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.matheusxreis.notes.R
@@ -87,6 +90,7 @@ class NotesFragment : Fragment() {
     }
 
     fun setUpRecyclerView(){
+        ItemTouchHelper(ItemTouchCallback()).attachToRecyclerView(mView.notes_rv)
         mView.notes_rv.adapter = notesAdapter
         mView.notes_rv.layoutManager = LinearLayoutManager(requireContext())
     }
@@ -127,5 +131,38 @@ class NotesFragment : Fragment() {
         }
     }
 
+
+    inner class ItemTouchCallback(): ItemTouchHelper.SimpleCallback(
+        ItemTouchHelper.DOWN or ItemTouchHelper.UP,
+        ItemTouchHelper.RIGHT
+    ){
+        override fun onMove(
+            recyclerView: RecyclerView,
+            viewHolder: RecyclerView.ViewHolder,
+            target: RecyclerView.ViewHolder
+        ): Boolean {
+
+            val startPosition = viewHolder.adapterPosition
+            val endPosition = target.adapterPosition
+            recyclerView.adapter?.notifyItemMoved(startPosition, endPosition)
+            return true
+        }
+
+        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+            val noteId = notesAdapter.notes[viewHolder.adapterPosition].id
+
+            if(!noteId.toString().isNullOrBlank()){
+                try{
+                    mainViewModel.deleteNote(noteId as Int)
+                    Toast.makeText(requireContext(), "The note was deleted", Toast.LENGTH_LONG).show()
+                }catch(err:Exception){
+                    Toast.makeText(requireContext(), "Something was wrong", Toast.LENGTH_LONG).show()
+
+                }
+
+            }
+
+        }
+    }
 
 }
