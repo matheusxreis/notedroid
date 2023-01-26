@@ -46,8 +46,15 @@ class NoteInfoFragment : Fragment() {
         if(args.noteId != 0) {
             mainViewModel.getNoteById(args.noteId)
             mainViewModel.currentNote.observe(viewLifecycleOwner) {
-                binding.note = it.entityToNote(it)
+                if(it != null){
+                    binding.note = it.entityToNote(it)
+                }
             }
+        }
+
+        binding.editFab.setOnClickListener {
+            val action = NoteInfoFragmentDirections.actionNoteInfoFragmentToWriteNoteFragment(noteId = args.noteId as Int)
+            findNavController().navigate(action)
         }
 
 

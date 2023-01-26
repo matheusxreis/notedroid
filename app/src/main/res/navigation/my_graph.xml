@@ -25,6 +25,13 @@
         <action
             android:id="@+id/action_writeNoteFragment_to_notes_fragment"
             app:destination="@id/notes_fragment" />
+        <argument
+            android:name="noteId"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <action
+            android:id="@+id/action_writeNoteFragment_to_noteInfoFragment"
+            app:destination="@id/noteInfoFragment" />
     </fragment>
     <fragment
         android:id="@+id/noteInfoFragment"
@@ -42,5 +49,8 @@
             android:name="noteTitle"
             app:argType="string"
             android:defaultValue="" />
+        <action
+            android:id="@+id/action_noteInfoFragment_to_writeNoteFragment"
+            app:destination="@id/writeNoteFragment" />
     </fragment>
 </navigation>

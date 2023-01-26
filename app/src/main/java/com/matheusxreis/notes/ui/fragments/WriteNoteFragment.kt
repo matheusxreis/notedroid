@@ -8,24 +8,28 @@ import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.matheusxreis.notes.R
+import com.matheusxreis.notes.data.database.entityToNote
 import com.matheusxreis.notes.databinding.FragmentWriteNoteBinding
 import com.matheusxreis.notes.viewmodels.MainViewModel
 
 class WriteNoteFragment : Fragment() {
 
-    lateinit var binding:FragmentWriteNoteBinding
+    lateinit var binding: FragmentWriteNoteBinding
     lateinit var mainViewModel: MainViewModel;
-    lateinit var title:String
-    lateinit var text:String
-    var important:Boolean = false
+    lateinit var title: String
+    lateinit var text: String
+    var important: Boolean = false
+
+    val args by navArgs<WriteNoteFragmentArgs>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         class Back(enabled: Boolean) : OnBackPressedCallback(enabled) {
             override fun handleOnBackPressed() {
-               goBack()
+                goBack()
             }
 
         }
@@ -41,19 +45,29 @@ class WriteNoteFragment : Fragment() {
     ): View? {
 
         binding = FragmentWriteNoteBinding.inflate(inflater, container, false)
+
+        if (args.noteId != 0) {
+            mainViewModel.getNoteById(id)
+            mainViewModel.currentNote.observe(viewLifecycleOwner) {
+                if(it!=null){
+                    binding.note = it.entityToNote(it)
+                    binding.switchButton.isChecked = it.important
+                }
+            }
+        }
         binding.addButton.setOnClickListener {
             val titleText = binding.editTextTitle.text
             val textText = binding.editTextText.text
 
-            if(titleText.isNullOrBlank()){
+            if (titleText.isNullOrBlank()) {
                 binding.editTextTitleLayout.error = "Give a title to a note"
             }
-            if(textText.isNullOrBlank()){
+            if (textText.isNullOrBlank()) {
                 binding.editTextTextLayout.error = "Write something"
             }
 
 
-            if(!textText.isNullOrBlank() && !titleText.isNullOrBlank()){
+            if (!textText.isNullOrBlank() && !titleText.isNullOrBlank()) {
 
                 title = titleText.toString()
                 text = textText.toString()
@@ -66,7 +80,7 @@ class WriteNoteFragment : Fragment() {
                     title = title,
                     text = text,
                     important = important
-                    )
+                )
 
                 binding.editTextTitle.text = null
                 binding.editTextText.text = null
@@ -80,7 +94,7 @@ class WriteNoteFragment : Fragment() {
         return binding.root
     }
 
-    fun goBack(){
+    fun goBack() {
         findNavController().navigate(R.id.action_writeNoteFragment_to_notes_fragment)
     }
 
