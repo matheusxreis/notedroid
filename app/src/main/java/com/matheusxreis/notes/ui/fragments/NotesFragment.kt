@@ -32,7 +32,8 @@ class NotesFragment : Fragment() {
 
         notesAdapter = NotesAdapter {
             val action = NotesFragmentDirections.actionNotesFragmentToNoteInfoFragment(
-                noteId = it as Int
+                noteId = it as Int,
+                noteTitle = "See your note"
             )
             findNavController().navigate(action)
         }

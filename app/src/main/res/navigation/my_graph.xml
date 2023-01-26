@@ -29,7 +29,7 @@
     <fragment
         android:id="@+id/noteInfoFragment"
         android:name="com.matheusxreis.notes.ui.fragments.NoteInfoFragment"
-        android:label="fragment_note_info"
+        android:label="{noteTitle}"
         tools:layout="@layout/fragment_note_info" >
         <action
             android:id="@+id/action_noteInfoFragment_to_notes_fragment"
@@ -38,5 +38,9 @@
             android:name="noteId"
             app:argType="integer"
             android:defaultValue="0" />
+        <argument
+            android:name="noteTitle"
+            app:argType="string"
+            android:defaultValue="" />
     </fragment>
 </navigation>
