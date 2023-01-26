@@ -34,5 +34,6 @@ class NotesAdapter():RecyclerView.Adapter<NotesAdapter.NotesViewHolder>(){
     fun setData(data: List<Note>){
         notes = data
         notifyItemInserted(itemCount)
+        notifyDataSetChanged()
     }
 }
