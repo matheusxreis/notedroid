@@ -1,10 +1,14 @@
 package com.matheusxreis.notes.ui.fragments
 
+import android.app.AlertDialog
+import android.app.Dialog
+import android.content.DialogInterface
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -44,6 +48,27 @@ class NoteInfoFragment : Fragment() {
 
         val binding = FragmentNoteInfoBinding.inflate(inflater, container, false)
 
+
+        var alert = AlertDialog.Builder(requireActivity())
+        alert.setMessage("Do you want to delete this note?")
+            .setPositiveButton("Yes",
+                DialogInterface.OnClickListener { _, _ ->
+                    try {
+                        mainViewModel.deleteNote(args.noteId)
+                        goBack()
+                        Toast.makeText(requireContext(), "The note was deleted", Toast.LENGTH_LONG)
+                            .show()
+                    }catch(err:Exception){
+                        Toast.makeText(requireContext(), "Something was wrong", Toast.LENGTH_LONG)
+                            .show()
+                    }
+
+                })
+            .setNegativeButton("Cancel", DialogInterface.OnClickListener { dialog,id ->
+                dialog.dismiss()
+            }).create()
+
+
         if(args.noteId != 0) {
             mainViewModel.getNoteById(args.noteId)
             mainViewModel.currentNote.observe(viewLifecycleOwner) {
@@ -58,9 +83,7 @@ class NoteInfoFragment : Fragment() {
             }
 
             binding.deleteFab.setOnClickListener {
-                mainViewModel.deleteNote(args.noteId)
-                goBack()
-
+                 alert.show()
             }
         }
 
