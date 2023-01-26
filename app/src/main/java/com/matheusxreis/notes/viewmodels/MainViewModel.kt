@@ -69,6 +69,7 @@ class MainViewModel @Inject constructor(
             notes.value = it
         }
     }
+
     fun saveNote(title:String, text:String, important: Boolean)= viewModelScope.launch {
         val note = NoteEntity(
             title = title,
@@ -78,4 +79,7 @@ class MainViewModel @Inject constructor(
         localDataSource.insertNote(note)
 
     }
+
+    fun getNoteById(id:Int) = localDataSource.findNoteById(id)
+
 }
