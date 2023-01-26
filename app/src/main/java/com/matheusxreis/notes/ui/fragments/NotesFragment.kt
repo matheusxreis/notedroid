@@ -95,11 +95,13 @@ class NotesFragment : Fragment() {
         mainViewModel.notes.observe(viewLifecycleOwner) {
             val notes = it?.map {  noteEntity -> noteEntity.entityToNote(noteEntity)  }
 
-            if (!notes.isNullOrEmpty()) {
+            if (notes != null) {
                 notesAdapter.setData(notes)
-                hideNoResultValues()
+            }
+            if(notes.isNullOrEmpty()){
+               showNoResultValues()
             }else {
-                showNoResultValues()
+                hideNoResultValues()
             }
         }
     }
