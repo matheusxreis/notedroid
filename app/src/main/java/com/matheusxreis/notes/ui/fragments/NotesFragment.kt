@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
@@ -57,6 +58,13 @@ class NotesFragment : Fragment() {
                 filterImportantName = selectedFilterName,
                 filterImportantId = selectedId
             )
+        }
+
+        mView.fab.setOnClickListener {
+
+             findNavController().navigate(
+                 R.id.action_notes_fragment_to_writeNoteFragment
+             )
         }
 
         return mView

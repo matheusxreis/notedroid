@@ -9,10 +9,18 @@
         android:id="@+id/notes_fragment"
         android:name="com.matheusxreis.notes.ui.fragments.NotesFragment"
         android:label="Your notes"
-        tools:layout="@layout/fragment_notes" />
+        tools:layout="@layout/fragment_notes" >
+        <action
+            android:id="@+id/action_notes_fragment_to_writeNoteFragment"
+            app:destination="@id/writeNoteFragment" />
+    </fragment>
     <fragment
         android:id="@+id/writeNoteFragment"
         android:name="com.matheusxreis.notes.WriteNoteFragment"
         android:label="Write a note"
-        tools:layout="@layout/fragment_write_note" />
+        tools:layout="@layout/fragment_write_note" >
+        <action
+            android:id="@+id/action_writeNoteFragment_to_notes_fragment"
+            app:destination="@id/notes_fragment" />
+    </fragment>
 </navigation>
