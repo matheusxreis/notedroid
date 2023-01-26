@@ -52,6 +52,7 @@ class WriteNoteFragment : Fragment() {
                 if(it!=null){
                     binding.note = it.entityToNote(it)
                     binding.switchButton.isChecked = it.important
+                    binding.addButton.text = "Edit"
                 }
             }
         }
@@ -95,7 +96,11 @@ class WriteNoteFragment : Fragment() {
     }
 
     fun goBack() {
-        findNavController().navigate(R.id.action_writeNoteFragment_to_notes_fragment)
+        val id = when(args.noteId){
+            0 -> R.id.action_writeNoteFragment_to_notes_fragment
+            else -> R.id.action_writeNoteFragment_to_noteInfoFragment
+        }
+        findNavController().navigate(id)
     }
 
 }
