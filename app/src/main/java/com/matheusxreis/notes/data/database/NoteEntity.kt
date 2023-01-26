@@ -2,6 +2,7 @@ package com.matheusxreis.notes.data.database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.matheusxreis.notes.models.Note
 import com.matheusxreis.notes.utils.Constants
 
 @Entity(
@@ -14,4 +15,14 @@ class NoteEntity(
 ){
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
+}
+
+
+fun NoteEntity.entityToNote(noteEntity: NoteEntity): Note {
+    return Note(
+        id = noteEntity.id,
+        title = noteEntity.title,
+        text = noteEntity.text,
+        important = noteEntity.important
+    )
 }
