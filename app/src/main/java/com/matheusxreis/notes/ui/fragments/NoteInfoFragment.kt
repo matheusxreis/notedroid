@@ -12,6 +12,7 @@ import androidx.navigation.fragment.navArgs
 import com.matheusxreis.notes.R
 import com.matheusxreis.notes.data.database.entityToNote
 import com.matheusxreis.notes.databinding.FragmentNoteInfoBinding
+import com.matheusxreis.notes.utils.ellipsize
 import com.matheusxreis.notes.viewmodels.MainViewModel
 
 

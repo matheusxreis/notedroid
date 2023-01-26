@@ -1,9 +1,11 @@
 package com.matheusxreis.notes.bindingadapters
 
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import com.matheusxreis.notes.R
+import com.matheusxreis.notes.utils.ellipsize
 
 class NoteInfoBinding {
 
@@ -28,5 +30,10 @@ class NoteInfoBinding {
             }
         }
 
+        @BindingAdapter("ellipsizeTitleInfo")
+        @JvmStatic
+        fun ellipsizeTitleInfo(textView: TextView, title:String?){
+            textView.text = title?.ellipsize(17)
+        }
     }
 }
