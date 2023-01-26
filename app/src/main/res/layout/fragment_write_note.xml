@@ -7,40 +7,54 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".WriteNoteFragment">
 
-   <EditText
-       android:id="@+id/edit_text_title"
-       android:layout_height="wrap_content"
-       android:layout_width="match_parent"
-       android:hint="Give a title to this note"
-       app:layout_constraintTop_toTopOf="parent"
-       app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintEnd_toEndOf="parent"
-       android:layout_marginTop="120dp"
-       android:layout_marginEnd="24dp"
-       android:layout_marginStart="24dp"
-       android:maxLines="1"
-       />
-
-    <EditText
-        android:id="@+id/edit_text_text"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/edit_text_title_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/edit_text_title"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="24dp">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_text_title"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:hint="Give a title to this note"
+            android:maxLines="1"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/edit_text_text_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/edit_text_title_layout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         android:layout_marginStart="24dp"
-        android:minLines="10"
-        android:hint="Write the note"
-        android:gravity="top"
-        />
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_text_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minLines="10"
+            android:maxLines="10"
+            android:hint="Write the note"
+            android:gravity="top"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <TextView
         android:id="@+id/is_important_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/edit_text_text"
+        app:layout_constraintTop_toBottomOf="@id/edit_text_text_layout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginStart="24dp"
