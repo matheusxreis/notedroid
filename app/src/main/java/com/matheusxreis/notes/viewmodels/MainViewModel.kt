@@ -6,6 +6,7 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.matheusxreis.notes.data.DataStoreRepository
 import com.matheusxreis.notes.data.LocalDataSource
+import com.matheusxreis.notes.data.database.NoteEntity
 import com.matheusxreis.notes.models.Note
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -57,5 +58,16 @@ class MainViewModel @Inject constructor(
       }catch(err:Exception){
 
       }
+    }
+
+
+    fun saveNote(title:String, text:String, important: Boolean)= viewModelScope.launch {
+        val note = NoteEntity(
+            title = title,
+            text = text,
+            important = important
+        )
+        localDataSource.insertNote(note)
+
     }
 }
