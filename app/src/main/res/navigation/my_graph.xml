@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/writeNoteFragment"
-        android:name="com.matheusxreis.notes.WriteNoteFragment"
+        android:name="com.matheusxreis.notes.ui.fragments.WriteNoteFragment"
         android:label="Write a note"
         tools:layout="@layout/fragment_write_note" >
         <action
