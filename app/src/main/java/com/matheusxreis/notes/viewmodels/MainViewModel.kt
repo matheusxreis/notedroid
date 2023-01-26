@@ -1,5 +1,6 @@
 package com.matheusxreis.notes.viewmodels
 
+import android.provider.ContactsContract.CommonDataKinds.Note
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -89,5 +90,22 @@ class MainViewModel @Inject constructor(
         }
     }
 
+    fun updateNote(
+        id:Int,
+        title: String,
+        text: String,
+        important: Boolean
+    ){
+        val note = NoteEntity(
+            id = id,
+            title = title,
+            text = text,
+            important = important
+        )
+
+        viewModelScope.launch(Dispatchers.IO){
+            localDataSource.updateNote(note)
+        }
+    }
 
 }

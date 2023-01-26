@@ -9,12 +9,13 @@ import com.matheusxreis.notes.utils.Constants
     tableName = Constants.TABLE_NAME_NOTE
 )
 class NoteEntity(
+    @PrimaryKey(autoGenerate = true)
+    var id: Int = 0,
     var title: String,
     var text: String,
     var important: Boolean
 ){
-    @PrimaryKey(autoGenerate = true)
-    var id: Int = 0
+
 }
 
 

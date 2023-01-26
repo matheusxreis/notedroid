@@ -15,4 +15,5 @@ class LocalDataSource @Inject constructor(
     fun readImportantNotes () = notesDao.readImportantNotes()
     fun readNotImportantNotes () = notesDao.readNotImportantNotes()
     suspend fun findNoteById (id:Int) = notesDao.findNoteById(id)
+    suspend fun updateNote (note: NoteEntity) = notesDao.updateNote(note)
 }

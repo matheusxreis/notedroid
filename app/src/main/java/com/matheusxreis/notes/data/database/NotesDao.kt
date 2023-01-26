@@ -3,6 +3,7 @@ package com.matheusxreis.notes.data.database
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -22,4 +23,7 @@ interface NotesDao {
 
     @Query("SELECT * FROM notes WHERE id=:id")
     fun findNoteById(id:Int):Flow<NoteEntity>
+
+    @Update
+    fun updateNote(note:NoteEntity)
 }

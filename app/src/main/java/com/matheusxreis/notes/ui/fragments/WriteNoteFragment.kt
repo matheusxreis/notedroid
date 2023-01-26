@@ -77,11 +77,7 @@ class WriteNoteFragment : Fragment() {
                 binding.editTextTextLayout.error = null
                 binding.editTextTitleLayout.error = null
 
-                mainViewModel.saveNote(
-                    title = title,
-                    text = text,
-                    important = important
-                )
+                handleAction()
 
                 binding.editTextTitle.text = null
                 binding.editTextText.text = null
@@ -96,11 +92,31 @@ class WriteNoteFragment : Fragment() {
     }
 
     fun goBack() {
+
+        val actionToNoteInfo = WriteNoteFragmentDirections.actionWriteNoteFragmentToNoteInfoFragment( noteId = args.noteId)
+        val navController = findNavController()
         val id = when(args.noteId){
-            0 -> R.id.action_writeNoteFragment_to_notes_fragment
-            else -> R.id.action_writeNoteFragment_to_noteInfoFragment
+            0 -> navController.navigate(R.id.action_writeNoteFragment_to_notes_fragment)
+            else ->  navController.navigate(actionToNoteInfo)
         }
-        findNavController().navigate(id)
+
+    }
+
+    fun handleAction(){
+        if(args.noteId != 0){
+            mainViewModel.updateNote(
+                id = args.noteId,
+                title = title,
+                text = text,
+                important = important
+            )
+        }else {
+            mainViewModel.saveNote(
+                title = title,
+                text = text,
+                important = important
+            )
+        }
     }
 
 }
