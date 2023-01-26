@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.matheusxreis.notes.R
-import com.matheusxreis.notes.data.database.NoteEntity
 import com.matheusxreis.notes.data.database.entityToNote
 import com.matheusxreis.notes.databinding.FragmentNoteInfoBinding
 import com.matheusxreis.notes.viewmodels.MainViewModel
@@ -19,6 +19,7 @@ class NoteInfoFragment : Fragment() {
 
 
     lateinit var mainViewModel: MainViewModel;
+    val args by navArgs<NoteInfoFragmentArgs>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,10 +43,12 @@ class NoteInfoFragment : Fragment() {
 
         val binding = FragmentNoteInfoBinding.inflate(inflater, container, false)
 
-        mainViewModel.getNoteById(1)
-        mainViewModel.currentNote.observe(viewLifecycleOwner) {
-            binding.note = it.entityToNote(it)
+        if(args.noteId != 0) {
+            mainViewModel.getNoteById(args.noteId)
+            mainViewModel.currentNote.observe(viewLifecycleOwner) {
+                binding.note = it.entityToNote(it)
             }
+        }
 
 
         return binding.root
