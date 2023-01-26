@@ -57,6 +57,10 @@ class NotesFragment : Fragment() {
             defineSelectedChip(value.selectedImportantFilterId, mView.chip_group)
         }
 
+
+        if(mainViewModel.notes.value.isNullOrEmpty()){
+            showNoResultValues()
+        }
         setUpRecyclerView()
         populateRecyclerView()
 
