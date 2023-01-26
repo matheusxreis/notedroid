@@ -1,8 +1,8 @@
 package com.matheusxreis.notes.utils
 
-fun String.ellipsize():String{
-    if(this.length>20){
-        return "${this.slice(0..19)}..."
+fun String.ellipsize(number:Int = 20):String{
+    if(this.length>number){
+        return "${this.slice(0..number-1)}..."
     }
     return this
 }
