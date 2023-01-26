@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -110,12 +111,19 @@ class WriteNoteFragment : Fragment() {
                 text = text,
                 important = important
             )
+
+            Toast.makeText(requireContext(), "The note was updated", Toast.LENGTH_LONG)
+                .show()
         }else {
             mainViewModel.saveNote(
                 title = title,
                 text = text,
                 important = important
             )
+
+
+            Toast.makeText(requireContext(), "The note was created", Toast.LENGTH_LONG)
+                .show()
         }
     }
 
