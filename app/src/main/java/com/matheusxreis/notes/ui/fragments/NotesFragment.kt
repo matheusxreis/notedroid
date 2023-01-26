@@ -1,5 +1,6 @@
 package com.matheusxreis.notes.ui.fragments
 
+import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -72,6 +73,7 @@ class NotesFragment : Fragment() {
              )
         }
 
+
         return mView
     }
 
@@ -92,9 +94,34 @@ class NotesFragment : Fragment() {
     fun populateRecyclerView() {
         mainViewModel.notes.observe(viewLifecycleOwner) {
             val notes = it?.map {  noteEntity -> noteEntity.entityToNote(noteEntity)  }
-            if (notes != null) {
+
+            if (!notes.isNullOrEmpty()) {
                 notesAdapter.setData(notes)
+                hideNoResultValues()
+            }else {
+                showNoResultValues()
             }
+        }
+    }
+
+    fun showNoResultValues(){
+        val text =  mView.no_result_tv
+        val image =  mView.no_result_image
+
+        if(text.visibility == View.INVISIBLE){
+            text.visibility = View.VISIBLE
+            image.visibility = View.VISIBLE
+        }
+
+    }
+
+    fun hideNoResultValues(){
+        val text =  mView.no_result_tv
+        val image =  mView.no_result_image
+
+        if(text.visibility == View.VISIBLE) {
+            text.visibility = View.INVISIBLE
+            image.visibility = View.INVISIBLE
         }
     }
 
