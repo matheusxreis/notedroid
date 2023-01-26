@@ -10,7 +10,7 @@ import com.matheusxreis.notes.utils.Constants
 class NoteEntity(
     var title: String,
     var text: String,
-    var important: Boolean = false
+    var important: Boolean
 ){
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
