@@ -94,6 +94,7 @@
         android:scaleType="centerCrop"
         android:alpha="0.5"
         android:visibility="invisible"
+        app:tint="@android:color/darker_gray"
         />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
