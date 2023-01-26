@@ -1,99 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".WriteNoteFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/edit_text_title_layout"
+    <data>
+        <variable
+            name="note"
+            type="com.matheusxreis.notes.models.Note" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginStart="24dp">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edit_text_title"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:hint="Give a title to this note"
-            android:maxLines="1"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
+        android:layout_height="match_parent"
+        tools:context=".WriteNoteFragment">
 
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/edit_text_text_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/edit_text_title_layout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginStart="24dp"
-        >
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edit_text_text"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edit_text_title_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minLines="10"
-            android:maxLines="10"
-            android:hint="Write the note"
-            android:gravity="top"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="24dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_text_title"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:text="@{note.title}"
+                android:hint="Give a title to this note"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edit_text_text_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/edit_text_title_layout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="24dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_text_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minLines="10"
+                android:maxLines="10"
+                android:hint="Write the note"
+                android:text="@{note.text}"
+                android:gravity="top" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <TextView
+            android:id="@+id/is_important_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/edit_text_text_layout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:text="This note is important?"
+            app:layout_constraintHorizontal_bias="0"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            style="@style/MySwitchStyle"
+            android:id="@+id/switch_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/is_important_tv"
+            app:layout_constraintTop_toTopOf="@id/is_important_tv"
+            app:layout_constraintBottom_toBottomOf="@id/is_important_tv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintHorizontal_bias="1"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="24dp"
+            android:checked="false"
+
             />
-    </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/switch_button"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="24dp"
+            android:text="Adicionar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintVertical_bias="0" />
 
 
-    <TextView
-        android:id="@+id/is_important_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/edit_text_text_layout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:text="This note is important?"
-        app:layout_constraintHorizontal_bias="0"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        />
-
-   <com.google.android.material.switchmaterial.SwitchMaterial
-       style="@style/MySwitchStyle"
-       android:id="@+id/switch_button"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       app:layout_constraintStart_toEndOf="@id/is_important_tv"
-       app:layout_constraintTop_toTopOf="@id/is_important_tv"
-       app:layout_constraintBottom_toBottomOf="@id/is_important_tv"
-       app:layout_constraintEnd_toEndOf="parent"
-       app:layout_constraintVertical_bias="0.5"
-       app:layout_constraintHorizontal_bias="1"
-       android:layout_marginEnd="24dp"
-       android:layout_marginStart="24dp"
-       android:checked="false"
-
-      />
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/switch_button"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="24dp"
-        android:text="Adicionar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="0"
-        />
-
-
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
