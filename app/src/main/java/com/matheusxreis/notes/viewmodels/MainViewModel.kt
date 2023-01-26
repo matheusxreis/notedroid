@@ -23,6 +23,9 @@ class MainViewModel @Inject constructor(
     var notes:MutableLiveData<List<NoteEntity>> = MutableLiveData()
     val actualFilter = dataStoreRepo.readFilterImportant.asLiveData()
 
+    val currentNote:MutableLiveData<NoteEntity> = MutableLiveData()
+
+
     fun changeFilter(
         filterImportantName: String,
         filterImportantId: Int
@@ -80,6 +83,11 @@ class MainViewModel @Inject constructor(
 
     }
 
-    fun getNoteById(id:Int) = localDataSource.findNoteById(id)
+    fun getNoteById(id:Int) = viewModelScope.launch {
+        localDataSource.findNoteById(id).collect {
+            currentNote.value = it
+        }
+    }
+
 
 }

@@ -21,5 +21,5 @@ interface NotesDao {
     fun readNotImportantNotes():Flow<List<NoteEntity>>
 
     @Query("SELECT * FROM notes WHERE id=:id")
-    fun findNoteById(id:Int):NoteEntity
+    fun findNoteById(id:Int):Flow<NoteEntity>
 }
