@@ -22,4 +22,9 @@
         <item name="android:textColor">@color/chip_text_color</item>
         <item name="checkedIconTint">@color/blue_500</item>
     </style>
+
+    <style name="MySwitchStyle" parent="Widget.AppCompat.CompoundButton.Switch">
+        <item name="thumbTint">@color/switch_thumb_color</item>
+        <item name="trackTint">@color/switch_track_color</item>
+    </style>
 </resources>

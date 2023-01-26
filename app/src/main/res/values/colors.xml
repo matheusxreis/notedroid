@@ -23,4 +23,9 @@
     <color name="chip_text_checked">@color/blue_500</color>
     <color name="chip_text">@color/blue_200</color>
 
+    <!-- switch color -->
+    <color name="thumb_selected">@color/blue_500</color>
+    <color name="thumb">#767676</color>
+    <color name="track_selected">@color/blue_200</color>
+    <color name="track">#B4B9BA</color>
 </resources>
