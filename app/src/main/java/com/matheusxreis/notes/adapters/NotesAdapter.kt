@@ -6,14 +6,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.matheusxreis.notes.databinding.NotesRowLayoutBinding
 import com.matheusxreis.notes.models.Note
 
-class NotesAdapter():RecyclerView.Adapter<NotesAdapter.NotesViewHolder>(){
+class NotesAdapter(private val goToInfo:(id: Int?)->Unit):RecyclerView.Adapter<NotesAdapter.NotesViewHolder>(){
 
     var notes:List<Note> = listOf()
 
-    class NotesViewHolder(private val binding: NotesRowLayoutBinding):RecyclerView.ViewHolder(binding.root) {
+    class NotesViewHolder(private val binding: NotesRowLayoutBinding, private val callback:(id:Int?)->Unit):RecyclerView.ViewHolder(binding.root) {
         fun bind(note: Note){
             binding.note = note
             binding.executePendingBindings()
+
+            binding.cardRow.setOnClickListener {
+               callback(note.id)
+            }
         }
     }
 
@@ -21,7 +25,7 @@ class NotesAdapter():RecyclerView.Adapter<NotesAdapter.NotesViewHolder>(){
 
       val layoutInflater = LayoutInflater.from(parent.context)
       val binding = NotesRowLayoutBinding.inflate(layoutInflater, parent, false)
-        return NotesViewHolder(binding)
+        return NotesViewHolder(binding, goToInfo)
     }
     override fun onBindViewHolder(holder: NotesAdapter.NotesViewHolder, position: Int) {
        val currentNote = notes[position]

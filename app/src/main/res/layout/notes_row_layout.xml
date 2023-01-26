@@ -18,6 +18,7 @@
         android:layout_marginBottom="10dp">
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_row"
             android:layout_width="match_parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
