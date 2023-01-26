@@ -15,7 +15,6 @@ import com.google.android.material.chip.ChipGroup
 import com.matheusxreis.notes.R
 import com.matheusxreis.notes.adapters.NotesAdapter
 import com.matheusxreis.notes.data.database.entityToNote
-import com.matheusxreis.notes.models.Note
 import com.matheusxreis.notes.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_notes.view.*
@@ -62,7 +61,6 @@ class NotesFragment : Fragment() {
         }
 
         mView.fab.setOnClickListener {
-
              findNavController().navigate(
                  R.id.action_notes_fragment_to_writeNoteFragment
              )
@@ -73,7 +71,10 @@ class NotesFragment : Fragment() {
 
     private fun defineSelectedChip(filterId: Int, chipGroup: ChipGroup) {
         if(filterId != 0){
-            chipGroup.findViewById<Chip>(filterId).isChecked = true
+            val chip:Chip = chipGroup.findViewById<Chip>(filterId)
+            chip.isChecked = true
+            mainViewModel.changeFilter(filterImportantName = chip.text.toString().lowercase(),
+                                        filterImportantId = filterId)
         }
     }
 
@@ -83,10 +84,11 @@ class NotesFragment : Fragment() {
     }
 
     fun populateRecyclerView() {
-
         mainViewModel.notes.observe(viewLifecycleOwner) {
-            val notes = it.map {  noteEntity -> noteEntity.entityToNote(noteEntity)  }
-            notesAdapter.setData(notes)
+            val notes = it?.map {  noteEntity -> noteEntity.entityToNote(noteEntity)  }
+            if (notes != null) {
+                notesAdapter.setData(notes)
+            }
         }
     }
 

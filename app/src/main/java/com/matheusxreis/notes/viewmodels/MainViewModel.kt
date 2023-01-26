@@ -1,5 +1,6 @@
 package com.matheusxreis.notes.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
@@ -7,7 +8,6 @@ import androidx.lifecycle.viewModelScope
 import com.matheusxreis.notes.data.DataStoreRepository
 import com.matheusxreis.notes.data.LocalDataSource
 import com.matheusxreis.notes.data.database.NoteEntity
-import com.matheusxreis.notes.models.Note
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -19,29 +19,7 @@ class MainViewModel @Inject constructor(
     private val localDataSource: LocalDataSource
 ): ViewModel() {
 
-    var notes = localDataSource.readNotes().asLiveData()
-
-
-    private val mockListNotes = listOf(
-        Note(id=1, title="Be or not be", text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In aliquam et sem a maximus. Integer eleifend nisi a aliquet posuere. Nulla mollis facilisis enim, nec malesuada libero consequat at. Curabitur lacinia pulvinar ultricies. Mauris vel feugiat leo. Sed at placerat nulla, ac maximus velit. Ut aliquet dignissim dolor finibus aliquet.", important = true),
-        Note(id=2, title="Be or not be", text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In aliquam et sem a maximus. Integer eleifend nisi a aliquet posuere. Nulla mollis facilisis enim, nec malesuada libero consequat at. Curabitur lacinia pulvinar ultricies. Mauris vel feugiat leo. Sed at placerat nulla, ac maximus velit. Ut aliquet dignissim dolor finibus aliquet."),
-        Note(id=3, title="Be or not be", text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In aliquam et sem a maximus. Integer eleifend nisi a aliquet posuere. Nulla mollis facilisis enim, nec malesuada libero consequat at. Curabitur lacinia pulvinar ultricies. Mauris vel feugiat leo. Sed at placerat nulla, ac maximus velit. Ut aliquet dignissim dolor finibus aliquet."),
-        Note(id=4, title="Be or not be", text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In aliquam et sem a maximus. Integer eleifend nisi a aliquet posuere. Nulla mollis facilisis enim, nec malesuada libero consequat at. Curabitur lacinia pulvinar ultricies. Mauris vel feugiat leo. Sed at placerat nulla, ac maximus velit. Ut aliquet dignissim dolor finibus aliquet."),
-        Note(id=5, title="Be or not be", text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In aliquam et sem a maximus. Integer eleifend nisi a aliquet posuere. Nulla mollis facilisis enim, nec malesuada libero consequat at. Curabitur lacinia pulvinar ultricies. Mauris vel feugiat leo. Sed at placerat nulla, ac maximus velit. Ut aliquet dignissim dolor finibus aliquet.", important = true),
-        Note(id=6, title="Be or not be", text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In aliquam et sem a maximus. Integer eleifend nisi a aliquet posuere. Nulla mollis facilisis enim, nec malesuada libero consequat at. Curabitur lacinia pulvinar ultricies. Mauris vel feugiat leo. Sed at placerat nulla, ac maximus velit. Ut aliquet dignissim dolor finibus aliquet.", important = true),
-        Note(id=7, title="Be or not be", text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In aliquam et sem a maximus. Integer eleifend nisi a aliquet posuere. Nulla mollis facilisis enim, nec malesuada libero consequat at. Curabitur lacinia pulvinar ultricies. Mauris vel feugiat leo. Sed at placerat nulla, ac maximus velit. Ut aliquet dignissim dolor finibus aliquet."),
-        Note(id=8, title="Be or not be", text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In aliquam et sem a maximus. Integer eleifend nisi a aliquet posuere. Nulla mollis facilisis enim, nec malesuada libero consequat at. Curabitur lacinia pulvinar ultricies. Mauris vel feugiat leo. Sed at placerat nulla, ac maximus velit. Ut aliquet dignissim dolor finibus aliquet."),
-        Note(id=9, title="Be or not be", text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In aliquam et sem a maximus. Integer eleifend nisi a aliquet posuere. Nulla mollis facilisis enim, nec malesuada libero consequat at. Curabitur lacinia pulvinar ultricies. Mauris vel feugiat leo. Sed at placerat nulla, ac maximus velit. Ut aliquet dignissim dolor finibus aliquet.", important = true),
-        Note(id=10, title="Be or not be", text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In aliquam et sem a maximus. Integer eleifend nisi a aliquet posuere. Nulla mollis facilisis enim, nec malesuada libero consequat at. Curabitur lacinia pulvinar ultricies. Mauris vel feugiat leo. Sed at placerat nulla, ac maximus velit. Ut aliquet dignissim dolor finibus aliquet."),
-        Note(id=11, title="Be or not be", text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In aliquam et sem a maximus. Integer eleifend nisi a aliquet posuere. Nulla mollis facilisis enim, nec malesuada libero consequat at. Curabitur lacinia pulvinar ultricies. Mauris vel feugiat leo. Sed at placerat nulla, ac maximus velit. Ut aliquet dignissim dolor finibus aliquet.", important = true),
-        Note(id=12, title="Be or not be", text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In aliquam et sem a maximus. Integer eleifend nisi a aliquet posuere. Nulla mollis facilisis enim, nec malesuada libero consequat at. Curabitur lacinia pulvinar ultricies. Mauris vel feugiat leo. Sed at placerat nulla, ac maximus velit. Ut aliquet dignissim dolor finibus aliquet."),
-        Note(id=13, title="Be or not be", text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In aliquam et sem a maximus. Integer eleifend nisi a aliquet posuere. Nulla mollis facilisis enim, nec malesuada libero consequat at. Curabitur lacinia pulvinar ultricies. Mauris vel feugiat leo. Sed at placerat nulla, ac maximus velit. Ut aliquet dignissim dolor finibus aliquet."),
-        Note(id=14, title="Be or not be", text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In aliquam et sem a maximus. Integer eleifend nisi a aliquet posuere. Nulla mollis facilisis enim, nec malesuada libero consequat at. Curabitur lacinia pulvinar ultricies. Mauris vel feugiat leo. Sed at placerat nulla, ac maximus velit. Ut aliquet dignissim dolor finibus aliquet."),
-        Note(id=15, title="Be or not be", text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In aliquam et sem a maximus. Integer eleifend nisi a aliquet posuere. Nulla mollis facilisis enim, nec malesuada libero consequat at. Curabitur lacinia pulvinar ultricies. Mauris vel feugiat leo. Sed at placerat nulla, ac maximus velit. Ut aliquet dignissim dolor finibus aliquet."),
-        )
-
-
-
+    var notes:MutableLiveData<List<NoteEntity>> = MutableLiveData()
     val actualFilter = dataStoreRepo.readFilterImportant.asLiveData()
 
     fun changeFilter(
@@ -54,12 +32,42 @@ class MainViewModel @Inject constructor(
               importantFilter = filterImportantName,
               importantFilterId = filterImportantId
           )
+          // gettings notes always that filter change
+          getNotes(filterImportantName)
+
       }catch(err:Exception){
 
       }
     }
 
 
+    fun getNotes(filter:String) = viewModelScope.launch {
+        Log.d("cachorr", filter)
+        when (filter.lowercase()) {
+            "all" -> getAllNotes()
+            "importants" -> getImportantsNotes()
+            "not importants" -> getNotImportantsNotes()
+            else -> getAllNotes()
+        }
+    }
+
+    private fun getNotImportantsNotes() {
+        Log.d("aiaw", "2@")
+        notes.value = listOf()
+    }
+
+    private suspend fun getImportantsNotes() {
+       localDataSource.readNotes().collect {
+           notes.value = it
+       }
+    }
+
+
+    private suspend fun getAllNotes() {
+        localDataSource.readNotes().collect {
+            notes.value = it
+        }
+    }
     fun saveNote(title:String, text:String, important: Boolean)= viewModelScope.launch {
         val note = NoteEntity(
             title = title,
