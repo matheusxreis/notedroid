@@ -108,4 +108,10 @@ class MainViewModel @Inject constructor(
         }
     }
 
+    fun deleteNote(
+        id:Int
+    ) = viewModelScope.launch (Dispatchers.IO) {
+        localDataSource.deleteNote(id)
+    }
+
 }

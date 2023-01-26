@@ -27,7 +27,7 @@ class NoteInfoFragment : Fragment() {
 
         class Back(enabled: Boolean) : OnBackPressedCallback(enabled) {
             override fun handleOnBackPressed() {
-                findNavController().navigate(R.id.action_noteInfoFragment_to_notes_fragment)
+                goBack()
             }
         }
         requireActivity().onBackPressedDispatcher.addCallback(this, Back(true))
@@ -51,15 +51,27 @@ class NoteInfoFragment : Fragment() {
                     binding.note = it.entityToNote(it)
                 }
             }
+
+            binding.editFab.setOnClickListener {
+                val action = NoteInfoFragmentDirections.actionNoteInfoFragmentToWriteNoteFragment(noteId = args.noteId as Int)
+                findNavController().navigate(action)
+            }
+
+            binding.deleteFab.setOnClickListener {
+                mainViewModel.deleteNote(args.noteId)
+                goBack()
+
+            }
         }
 
-        binding.editFab.setOnClickListener {
-            val action = NoteInfoFragmentDirections.actionNoteInfoFragmentToWriteNoteFragment(noteId = args.noteId as Int)
-            findNavController().navigate(action)
-        }
+
 
 
         return binding.root
     }
 
+    fun goBack(){
+        findNavController().navigate(R.id.action_noteInfoFragment_to_notes_fragment)
+
+    }
 }
