@@ -13,6 +13,7 @@ class NotesAdapter():RecyclerView.Adapter<NotesAdapter.NotesViewHolder>(){
     class NotesViewHolder(private val binding: NotesRowLayoutBinding):RecyclerView.ViewHolder(binding.root) {
         fun bind(note: Note){
             binding.note = note
+            binding.executePendingBindings()
         }
     }
 
@@ -20,13 +21,11 @@ class NotesAdapter():RecyclerView.Adapter<NotesAdapter.NotesViewHolder>(){
 
       val layoutInflater = LayoutInflater.from(parent.context)
       val binding = NotesRowLayoutBinding.inflate(layoutInflater, parent, false)
-       return NotesViewHolder(binding)
+        return NotesViewHolder(binding)
     }
-
     override fun onBindViewHolder(holder: NotesAdapter.NotesViewHolder, position: Int) {
        val currentNote = notes[position]
-
-        holder.bind(currentNote)
+       holder.bind(currentNote)
     }
 
     override fun getItemCount(): Int = notes.size;
