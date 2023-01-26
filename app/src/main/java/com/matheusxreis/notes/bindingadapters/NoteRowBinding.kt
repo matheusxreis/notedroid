@@ -19,6 +19,13 @@ class NoteRowBinding {
                         R.color.blue_500
                     )
                 )
+            }else {
+                imageView.setColorFilter(
+                    ContextCompat.getColor(
+                        imageView.context,
+                        android.R.color.darker_gray
+                    )
+                )
             }
         }
 
