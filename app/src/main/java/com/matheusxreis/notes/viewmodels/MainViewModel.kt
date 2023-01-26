@@ -10,6 +10,7 @@ import com.matheusxreis.notes.data.LocalDataSource
 import com.matheusxreis.notes.data.database.NoteEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -51,17 +52,17 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    private fun getNotImportantsNotes() {
-        Log.d("aiaw", "2@")
-        notes.value = listOf()
-    }
-
-    private suspend fun getImportantsNotes() {
-       localDataSource.readNotes().collect {
+    private suspend fun getNotImportantsNotes() {
+       localDataSource.readNotImportantNotes().collect {
            notes.value = it
        }
     }
 
+    private suspend fun getImportantsNotes() {
+       localDataSource.readImportantNotes().collect {
+           notes.value = it
+       }
+    }
 
     private suspend fun getAllNotes() {
         localDataSource.readNotes().collect {

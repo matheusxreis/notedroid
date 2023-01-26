@@ -12,5 +12,7 @@ class LocalDataSource @Inject constructor(
         notesDao.insertNote(note)
     }
     fun readNotes () = notesDao.readNotes()
+    fun readImportantNotes () = notesDao.readImportantNotes()
+    fun readNotImportantNotes () = notesDao.readNotImportantNotes()
 
 }
