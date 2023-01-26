@@ -68,6 +68,34 @@
         tools:listitem="@layout/notes_row_layout"
         />
 
+    <TextView
+        android:id="@+id/no_result_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No notes"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:fontFamily="@font/courgette"
+        android:alpha="0.5"
+        android:visibility="invisible"
+        />
+    <ImageView
+        android:id="@+id/no_result_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_create"
+        app:layout_constraintTop_toBottomOf="@id/no_result_tv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:scaleType="centerCrop"
+        android:alpha="0.5"
+        android:visibility="invisible"
+        />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
