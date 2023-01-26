@@ -6,11 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.matheusxreis.notes.R
+import com.matheusxreis.notes.databinding.FragmentNoteInfoBinding
 
 
 class NoteInfoFragment : Fragment() {
-    private var param1: String? = null
-    private var param2: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,8 +20,11 @@ class NoteInfoFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_note_info, container, false)
+
+        val binding = FragmentNoteInfoBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
 }
